@@ -48,25 +48,40 @@ export class Question {
 
   static parseSheet(
     sheet,
-    column: { title: string; prompt: string; correct: string, competency: string, dimension: string, indicator: string },
-    row: { offset: number }
+    column: {
+      title: string;
+      prompt: string;
+      correct: string;
+      competency: string;
+      dimension: string;
+      indicator: string;
+    },
+    row: { offset: number },
   ) {
     let currentRow = row.offset;
-    let questions: QCM[] = [];
+    const questions: QCM[] = [];
     let currentQuestion: QCM;
 
-
-    let previousDataInfo = {
+    const previousDataInfo = {
       competency: undefined,
       dimension: undefined,
       indicator: undefined,
-    }
+    };
 
     while (sheet[column.prompt + currentRow]) {
       if ((currentRow - row.offset) % 5 == 0 || currentRow == row.offset) {
-        if (column.competency) previousDataInfo.competency = sheet[column.competency + currentRow] ? sheet[column.competency + currentRow] : previousDataInfo.competency;
-        if (column.dimension) previousDataInfo.dimension = sheet[column.dimension + currentRow] ? sheet[column.dimension + currentRow] : previousDataInfo.dimension;
-        if (column.indicator) previousDataInfo.indicator = sheet[column.indicator + currentRow] ? sheet[column.indicator + currentRow] : previousDataInfo.indicator;
+        if (column.competency)
+          previousDataInfo.competency = sheet[column.competency + currentRow]
+            ? sheet[column.competency + currentRow]
+            : previousDataInfo.competency;
+        if (column.dimension)
+          previousDataInfo.dimension = sheet[column.dimension + currentRow]
+            ? sheet[column.dimension + currentRow]
+            : previousDataInfo.dimension;
+        if (column.indicator)
+          previousDataInfo.indicator = sheet[column.indicator + currentRow]
+            ? sheet[column.indicator + currentRow]
+            : previousDataInfo.indicator;
 
         currentQuestion = new QCM({
           id: sheet[column.title + currentRow],
@@ -102,14 +117,24 @@ export class QCM extends Question {
     id,
     prompt,
     answers,
-    competency, dimension, indicator
+    competency,
+    dimension,
+    indicator,
   }: {
     id: Txt;
     prompt: Txt;
     answers?: Answer[];
-    competency?: Txt, dimension?: Txt, indicator?: Txt
+    competency?: Txt;
+    dimension?: Txt;
+    indicator?: Txt;
   }) {
-    super({ id: new Txt(id), prompt: new Txt(prompt), competency, dimension, indicator });
+    super({
+      id: new Txt(id),
+      prompt: new Txt(prompt),
+      competency,
+      dimension,
+      indicator,
+    });
     this.answers = answers ? answers : [];
   }
 

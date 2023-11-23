@@ -40,7 +40,6 @@ No changes will be made to comply to use cases other than those of the SPF Finan
 - **Row offset**: This option allows you to choose the row you want to start the conversion from.
 - **Column**: This option allows you to define the column that contains the information you want to convert.
 
-
 ## Notes
 
 - The Excel file must follow a specific format to be converted to QTI or CSV.

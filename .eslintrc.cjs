@@ -1,52 +1,35 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es2021': true
+  env: {
+    browser: true,
+    es2021: true,
   },
-  'extends': [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:svelte/recommended'
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:svelte/recommended",
   ],
-  'overrides': [
+  overrides: [
     {
-      'env': {
-        'node': true
+      env: {
+        node: true,
       },
-      'files': [
-        '.eslintrc.{js,cjs}',
-        '*.svelte'
-      ],
-      'parserOptions': {
-        'sourceType': 'script',
-        'parser': '@typescript-eslint/parser'
-      }
-    }
+      files: [".eslintrc.{js,cjs}", "*.svelte"],
+      parserOptions: {
+        sourceType: "script",
+        parser: "@typescript-eslint/parser",
+      },
+    },
   ],
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module'
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  'plugins': [
-    '@typescript-eslint'
-  ],
-  'rules': {
-    'indent': [
-      'error',
-      2
-    ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'always'
-    ]
-  }
+  plugins: ["@typescript-eslint"],
+  rules: {
+    indent: ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    quotes: ["error", "single"],
+    semi: ["error", "always"],
+    "@typescript-eslint/no-unused-vars": "warn",
+  },
 };
-  

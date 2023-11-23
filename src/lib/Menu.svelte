@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Download from "./Input/Download.svelte";
-  import DropZone from "./Input/DropZone.svelte";
-  import LetterPicker from "./Input/LetterPicker.svelte";
-  import NumberPicker from "./Input/NumberPicker.svelte";
-  import RadioInput from "./Input/RadioInput.svelte";
-  import OptionnalLetterPicker from "./container/OptionnalLetterPicker.svelte";
+  import Download from './Input/Download.svelte';
+  import DropZone from './Input/DropZone.svelte';
+  import LetterPicker from './Input/LetterPicker.svelte';
+  import NumberPicker from './Input/NumberPicker.svelte';
+  import RadioInput from './Input/RadioInput.svelte';
+  import OptionnalLetterPicker from './container/OptionnalLetterPicker.svelte';
   import {
     currentSheet,
     selectedFormat,
@@ -12,8 +12,8 @@
     workbook,
     langOutput,
     rowOffset,
-  } from "./helper/store";
-  import Column from "./menu/Column.svelte";
+  } from './helper/store';
+  import Column from './menu/Column.svelte';
   let sheet: { txt: string; selected: boolean }[];
 
   workbook.subscribe((workbook) => {
@@ -35,32 +35,32 @@
     <RadioInput
       title="Format"
       inputChoices={[
-        { txt: "CSV", selected: true },
-        { txt: "PDF" },
-        { txt: "WORD", disabled: true },
-        { txt: "PPTX", disabled: true },
-        { txt: "QTI" },
+        { txt: 'CSV', selected: true },
+        { txt: 'PDF' },
+        { txt: 'WORD', disabled: true },
+        { txt: 'PPTX', disabled: true },
+        { txt: 'QTI' },
       ]}
       bind:choice={$selectedFormat}
     />
     <RadioInput
       title="Langage"
-      inputChoices={[{ txt: "FR" }, { txt: "NL" }, { txt: "DE" }]}
+      inputChoices={[{ txt: 'FR' }, { txt: 'NL' }, { txt: 'DE' }]}
       bind:choice={$langOutput}
     />
     <RadioInput
       title="Answer"
       inputChoices={[
-        { txt: "Hide", selected: true, value: true },
-        { txt: "Show", value: false },
+        { txt: 'Hide', selected: true, value: true },
+        { txt: 'Show', value: false },
       ]}
       bind:choice={$hideAnswer}
     />
     <RadioInput
       title="Compare"
       inputChoices={[
-        { txt: "OFF", selected: true },
-        { txt: "ON", disabled: true },
+        { txt: 'OFF', selected: true },
+        { txt: 'ON', disabled: true },
       ]}
     />
     <NumberPicker title="Row offset" bind:value={$rowOffset} />

@@ -6,10 +6,10 @@
     competencyColumn,
     dimensionColumn,
     indicatorColumn,
-  } from "../helper/store";
+  } from '../helper/store';
 
-  import LetterPicker from "../Input/LetterPicker.svelte";
-  import OptionnalLetterPicker from "../container/OptionnalLetterPicker.svelte";
+  import LetterPicker from '../Input/LetterPicker.svelte';
+  import OptionnalLetterPicker from '../container/OptionnalLetterPicker.svelte';
 </script>
 
 <fieldset class="columnPicker">

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { BlobReader, ZipWriter, BlobWriter } from "@zip.js/zip.js";
-  import { exportToCSV, exportToQTI } from "../helper/questions";
+  import { BlobReader, ZipWriter, BlobWriter } from '@zip.js/zip.js';
+  import { exportToCSV, exportToQTI } from '../helper/questions';
   import {
     currentSheet,
     selectedFormat,
@@ -14,8 +14,8 @@
     competencyColumn,
     dimensionColumn,
     indicatorColumn,
-  } from "../helper/store";
-  import { Question } from "../helper/question";
+  } from '../helper/store';
+  import { Question } from '../helper/question';
 
   let linkFile: HTMLAnchorElement;
 
@@ -34,60 +34,67 @@
       { offset: $rowOffset }
     );
     switch ($selectedFormat.toLocaleLowerCase()) {
-      case "csv":
-        const CSVString = exportToCSV(sheet, { lang: $langOutput});
+    case 'csv':{
+      const CSVString = exportToCSV(sheet, { lang: $langOutput});
 
-        const blob = new Blob([CSVString], { type: "text/csv;charset=utf-8," });
-        const objUrl = URL.createObjectURL(blob);
+      const blob = new Blob([CSVString], { type: 'text/csv;charset=utf-8,' });
+      const objUrl = URL.createObjectURL(blob);
 
-        linkFile.href = objUrl;
-        console.log(fileName)
-        linkFile.download = fileName + " - " + $langOutput;
-        linkFile.click();
-        break;
-      case "pdf":
-        window.print();
-        break;
-      case "qti":
-        const lang = $langOutput;
-        const { manifest, questionsManifest } = exportToQTI(sheet, {
-          lang,
-        });
+      linkFile.href = objUrl;
+      console.log(fileName);
+      linkFile.download = fileName + ' - ' + $langOutput;
+      linkFile.click();
+      break;
+    }
+    case 'pdf':{
+      window.print();
+      break;
+    }
+    case 'qti':
+    {
+      const lang = $langOutput;
+      const { manifest, questionsManifest } = exportToQTI(sheet, {
+        lang,
+      });
 
-        const manifestBlob = new Blob([manifest.toString()], {
-          type: "text/xml",
-        });
-        const questionsManifestBlob = questionsManifest.map(
-          (q) => new Blob([q.toString()], { type: "text/xml" })
+      const manifestBlob = new Blob([manifest.toString()], {
+        type: 'text/xml',
+      });
+      const questionsManifestBlob = questionsManifest.map(
+        (q) => new Blob([q.toString()], { type: 'text/xml' })
+      );
+
+      const ex = async () => {
+        const zipFileStream = new TransformStream();
+        const zipFileBlobPromise = new Response(
+          zipFileStream.readable
+        ).blob();
+
+        const zipWriter = new ZipWriter(new BlobWriter('application/zip'));
+
+        // Create manifest xml file
+        await zipWriter.add('imsmanifest.xml', new BlobReader(manifestBlob));
+
+        await Promise.all(
+          questionsManifestBlob.map((b, n) =>
+            zipWriter.add(`items/${n}/qti.xml`, new BlobReader(b))
+          )
         );
 
-        new Promise(async (resolve, reject) => {
-          const zipFileStream = new TransformStream();
-          const zipFileBlobPromise = new Response(
-            zipFileStream.readable
-          ).blob();
+        const finalBlob = await zipWriter.close();
 
-          const zipWriter = new ZipWriter(new BlobWriter("application/zip"));
+        linkFile.setAttribute('href', URL.createObjectURL(finalBlob));
+        linkFile.download = fileName + '.zip';
+        linkFile.click();
+      };
+      ex();
 
-          // Create manifest xml file
-          await zipWriter.add("imsmanifest.xml", new BlobReader(manifestBlob));
-
-          await Promise.all(
-            questionsManifestBlob.map((b, n) =>
-              zipWriter.add(`items/${n}/qti.xml`, new BlobReader(b))
-            )
-          );
-
-          const finalBlob = await zipWriter.close();
-
-          linkFile.setAttribute("href", URL.createObjectURL(finalBlob));
-          linkFile.download = fileName + ".zip";
-          linkFile.click();
-        });
-
-        break;
-      default:
-        console.log("Not unsuported yet");
+      break;
+    }
+    default:
+    {
+      console.log('Not unsuported yet');
+    }
     }
   };
 </script>
