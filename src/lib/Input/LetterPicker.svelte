@@ -59,7 +59,7 @@
     cursor: pointer;
   }
 
-  button:hover{
+  button:hover {
     filter: invert(0.5);
   }
 

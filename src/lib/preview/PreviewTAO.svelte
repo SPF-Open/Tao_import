@@ -4,7 +4,6 @@
 
   export let QCMs: QCM[] = [];
   export let hideAnswer: boolean;
-
 </script>
 
 <div class="questions" bind:this={$TaoPreviewBind}>
@@ -19,7 +18,7 @@
       </div>
       <div class="prompt">
         <br />
-         <!-- eslint-disable svelte/no-at-html-tags -->
+        <!-- eslint-disable svelte/no-at-html-tags -->
         {@html QCM.prompt}
         <!--eslint-enable-->
         <br />
@@ -33,7 +32,7 @@
             }`}
           >
             <div class="text">
-               <!-- eslint-disable svelte/no-at-html-tags -->
+              <!-- eslint-disable svelte/no-at-html-tags -->
               {@html answer.prompt}
               <!--eslint-enable-->
             </div>
@@ -49,7 +48,7 @@
 
 <style>
   .question {
-    font-family: "Source Sans Pro";
+    font-family: 'Source Sans Pro';
     display: flex;
     flex-direction: column;
     border: 3px solid #007f9f;

@@ -22,7 +22,6 @@
 
     // Restore options
     currentSheet.update(() => undefined);
-    
 
     const data = await fileTemp.arrayBuffer();
     /* data is an ArrayBuffer */
