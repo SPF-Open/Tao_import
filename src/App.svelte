@@ -34,7 +34,7 @@
           dimension: get(dimensionColumn),
           indicator: get(indicatorColumn),
         },
-        { offset: get(rowOffset) }
+        { offset: get(rowOffset) },
       );
     }, 100);
   };

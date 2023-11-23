@@ -57,7 +57,7 @@
     flex-wrap: wrap;
     align-items: center;
   }
-  .line{
+  .line {
     background-color: #00566b;
     width: 2px;
   }
