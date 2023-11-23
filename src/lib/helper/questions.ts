@@ -30,10 +30,10 @@ export const exportToCSV = (questions: QCM[], { lang }: { lang: string }) => {
 
   questions.forEach((question, n) => {
     csv.addSequentially(
-      prefix.titlePrefix + (n + 1 < 10 ? "0" + (n + 1) : n + 1).toString()
+      prefix.titlePrefix + (n + 1 < 10 ? "0" + (n + 1) : n + 1).toString(),
     );
     csv.addSequentially(
-      question.prompt.v ? question.prompt.v : question.prompt.w
+      question.prompt.v ? question.prompt.v : question.prompt.w,
     );
 
     csv.addSequentially(1);
@@ -50,18 +50,12 @@ export const exportToCSV = (questions: QCM[], { lang }: { lang: string }) => {
       .forEach((p) => csv.addSequentially(p));
 
     csv.addSequentially(
-      "choice_" + (question.answers.findIndex((q) => q.correct) + 1)
+      "choice_" + (question.answers.findIndex((q) => q.correct) + 1),
     );
 
-    csv.addSequentially(
-      question.dimension ? question.dimension.v : ""
-    )
-    csv.addSequentially(
-      question.competency ? question.competency.v : ""
-    )
-    csv.addSequentially(
-      question.indicator ? question.indicator.v : ""
-    )
+    csv.addSequentially(question.dimension ? question.dimension.v : "");
+    csv.addSequentially(question.competency ? question.competency.v : "");
+    csv.addSequentially(question.indicator ? question.indicator.v : "");
   });
 
   return csv.toStringEncoded();
@@ -69,7 +63,7 @@ export const exportToCSV = (questions: QCM[], { lang }: { lang: string }) => {
 
 export const exportToQTI = (questions: QCM[], { lang }: { lang: string }) => {
   const { zone, titlePrefix } = langZone(lang);
-  let questionsManifest = [];
+  const questionsManifest = [];
   const manifest = create({ version: "1.0" })
     .ele("manifest", {
       identifier: "QTI-TEST-MANIFEST-tao" + Math.floor(Math.random() * 1000000),
@@ -200,6 +194,6 @@ export const exportToQTI = (questions: QCM[], { lang }: { lang: string }) => {
   return { manifest: manifest.root(), questionsManifest };
 };
 
-const detectLangage = () => {
-  // TODO :
-};
+// const detectLangage = () => {
+//   // TODO :
+// };

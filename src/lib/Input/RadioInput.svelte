@@ -1,17 +1,17 @@
 <script lang="ts">
-  import Fieldset from "../container/Fieldset.svelte";
+  import Fieldset from '../container/Fieldset.svelte';
 
   interface inputChoice {
-    value?: any;
+    value?: string;
     txt: string;
     id?: string;
     selected?: boolean;
     disabled?: boolean;
   }
 
-  export let title = "";
+  export let title = '';
   export let inputChoices: inputChoice[] = [];
-  export let choice: any = "";
+  export let choice = '';
 
   let findSelection = () => {
     if (inputChoices.length < 1) return;
@@ -30,7 +30,7 @@
 
 <Fieldset {title}>
   {#each inputChoices as { id, txt, value, disabled }}
-    <div class={`radio ${disabled ? "disabled" : ""}`}>
+    <div class={`radio ${disabled ? 'disabled' : ''}`}>
       <input
         type="radio"
         name={id}

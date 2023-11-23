@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let value: string = "";
+  export let value: string = '';
   export let disable = false;
 
   const alpha = Array.from(Array(26)).map((_, i) => i + 65);

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Fieldset from "../container/Fieldset.svelte";
+  import Fieldset from '../container/Fieldset.svelte';
 
-  export let title = "";
+  export let title = '';
   export let value = 0;
 </script>
 

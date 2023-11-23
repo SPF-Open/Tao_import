@@ -1,10 +1,10 @@
 <script lang="ts">
-  import DropZone from "svelte-atoms/DropZone.svelte";
-  import { currentSheet, file, name, workbook } from "../helper/store";
-  import * as XLSX from "xlsx";
+  import DropZone from 'svelte-atoms/DropZone.svelte';
+  import { currentSheet, file, name, workbook } from '../helper/store';
+  import * as XLSX from 'xlsx';
 
   const maxLenghtName = 45;
-  let fileName = "";
+  let fileName = '';
   const onChange = async (e) => {
     const fileTemp = e.dataTransfer
       ? e.dataTransfer.files[0]
@@ -12,13 +12,13 @@
 
     fileName = fileTemp
       ? fileTemp.name.length > maxLenghtName
-        ? fileTemp.name.slice(0, maxLenghtName - 3) + "..."
+        ? fileTemp.name.slice(0, maxLenghtName - 3) + '...'
         : fileTemp.name
-      : "";
+      : '';
 
     // Update Store item
     file.update(() => fileTemp);
-    name.update(() => fileName.split(".").slice(0, -1).join());
+    name.update(() => fileName.split('.').slice(0, -1).join());
 
     // Restore options
     currentSheet.update(() => undefined);
@@ -32,7 +32,7 @@
 
 <div>
   <DropZone
-    title={"Drag & drop or"}
+    title={'Drag & drop or'}
     fileTitle={fileName}
     dropOnPage
     on:drop={onChange}

@@ -22,7 +22,9 @@ export class CSV extends Array<Array<string | number>> {
 
   toString(): string {
     return this.map((c) =>
-      c.map((e) => (typeof e === "string" ? '"' + e.trim() + '"' : e)).join(";")
+      c
+        .map((e) => (typeof e === "string" ? '"' + e.trim() + '"' : e))
+        .join(";"),
     ).join("\r\n");
   }
 
@@ -42,19 +44,19 @@ export class CSV extends Array<Array<string | number>> {
         .map((v) => {
           if (typeof v === "string") {
             rules.forEach(({ from, to }) => {
-              //@ts-ignore
+              //@ts-expect-error 'v' will always be a string in this case
               v = v.replaceAll(from, to);
             });
           }
           return v;
         })
         .map((e) => (typeof e === "string" ? '"' + e.trim() + '"' : e)) // Add trailing ""
-        .join(";")
+        .join(";"),
     ) // Add CSV separator
       .join("\r\n"); // Add break line
   }
 
-  static readString(csv: string) {
-    //TODO : Not implemented
-  }
+  // static readString(csv: string) {
+  //   //TODO : Not implemented
+  // }
 }

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { get } from "svelte/store";
-  import * as XLSX from "xlsx";
-  import Menu from "./lib/Menu.svelte";
-  import PreviewTao from "./lib/preview/PreviewTAO.svelte";
+  import { get } from 'svelte/store';
+  import * as XLSX from 'xlsx';
+  import Menu from './lib/Menu.svelte';
+  import PreviewTao from './lib/preview/PreviewTAO.svelte';
   import {
     column_row,
     competencyColumn,
@@ -15,8 +15,8 @@
     promptColumn,
     rowOffset,
     titleColumn,
-  } from "./lib/helper/store";
-  import { Question } from "./lib/helper/question";
+  } from './lib/helper/store';
+  import { Question } from './lib/helper/question';
 
   let questions = [];
   let workbook;

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import LetterPicker from "../Input/LetterPicker.svelte";
+  import { onMount } from 'svelte';
+  import LetterPicker from '../Input/LetterPicker.svelte';
 
   export let disable = false;
-  export let value = "";
+  export let value = '';
 
   onMount(() => {
     onChange();
@@ -11,7 +11,7 @@
 
   const onChange = () => {
     disable = !disable;
-    value = ""
+    value = '';
   };
 </script>
 

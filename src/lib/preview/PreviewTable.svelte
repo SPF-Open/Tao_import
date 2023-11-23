@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { QCM } from "./questions";
+  import type { QCM } from './questions';
 
   export let QCMs: QCM[] = [];
 </script>
@@ -18,7 +18,7 @@
         {QCM.prompt}
       </td>
       {#each QCM.answers as answer}
-        <td class={`${answer.correct ? "lg-green-bg" : ""}`}>{answer.prompt}</td
+        <td class={`${answer.correct ? 'lg-green-bg' : ''}`}>{answer.prompt}</td
         >
       {/each}
     </tr>

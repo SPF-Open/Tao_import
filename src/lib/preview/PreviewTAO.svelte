@@ -1,15 +1,10 @@
 <script lang="ts">
-  import { langOutput, TaoPreviewBind } from "../helper/store";
-  import { langZone, type QCM } from "../helper/question";
+  import { langOutput, TaoPreviewBind } from '../helper/store';
+  import type { QCM } from '../helper/question';
 
   export let QCMs: QCM[] = [];
   export let hideAnswer: boolean;
 
-  let titlePrefix;
-
-  langOutput.subscribe((l) => {
-    titlePrefix = langZone(l).titlePrefix;
-  });
 </script>
 
 <div class="questions" bind:this={$TaoPreviewBind}>
@@ -24,7 +19,9 @@
       </div>
       <div class="prompt">
         <br />
+         <!-- eslint-disable svelte/no-at-html-tags -->
         {@html QCM.prompt}
+        <!--eslint-enable-->
         <br />
         <br />
       </div>
@@ -32,11 +29,13 @@
         {#each QCM.answers as answer}
           <li
             class={`answer ${
-              answer.correct && hideAnswer !== true ? "correct" : ""
+              answer.correct && hideAnswer !== true ? 'correct' : ''
             }`}
           >
             <div class="text">
+               <!-- eslint-disable svelte/no-at-html-tags -->
               {@html answer.prompt}
+              <!--eslint-enable-->
             </div>
             {#if hideAnswer !== true}
               <div class="points">{answer.correct ? 3 : -1}</div>
