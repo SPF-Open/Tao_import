@@ -4,32 +4,32 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:svelte/recommended",
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:svelte/recommended',
   ],
   overrides: [
     {
       env: {
         node: true,
       },
-      files: [".eslintrc.{js,cjs}", "*.svelte"],
+      files: ['.eslintrc.{js,cjs}', '*.svelte'],
       parserOptions: {
-        sourceType: "script",
-        parser: "@typescript-eslint/parser",
+        sourceType: 'script',
+        parser: '@typescript-eslint/parser',
       },
     },
   ],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["@typescript-eslint"],
+  plugins: ['@typescript-eslint'],
   rules: {
-    indent: ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "single"],
-    semi: ["error", "always"],
-    "@typescript-eslint/no-unused-vars": "warn",
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    '@typescript-eslint/no-unused-vars': 'warn',
   },
 };

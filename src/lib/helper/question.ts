@@ -148,27 +148,27 @@ export class QCM extends Question {
   getFakeId(lang: string, n: number) {
     return (
       langZone(lang).titlePrefix +
-      (n + 1 < 10 ? "0" + (n + 1) : n + 1).toString()
+      (n + 1 < 10 ? '0' + (n + 1) : n + 1).toString()
     );
   }
 }
 
 export const langZone = (lang: string) => {
-  let zone = "";
-  let titlePrefix = "";
+  let zone = '';
+  let titlePrefix = '';
   switch (lang) {
-    case "FR":
-      zone = "fr-FR";
-      titlePrefix = "QCM ";
-      break;
-    case "NL":
-      zone = "nl-NL";
-      titlePrefix = "MKV ";
-      break;
-    case "DE":
-      zone = "de-DE";
-      titlePrefix = "Frage ";
-      break;
+  case 'FR':
+    zone = 'fr-FR';
+    titlePrefix = 'QCM ';
+    break;
+  case 'NL':
+    zone = 'nl-NL';
+    titlePrefix = 'MKV ';
+    break;
+  case 'DE':
+    zone = 'de-DE';
+    titlePrefix = 'Frage ';
+    break;
   }
   return { zone, titlePrefix };
 };
