@@ -23,16 +23,16 @@ export class CSV extends Array<Array<string | number>> {
   toString(): string {
     return this.map((c) =>
       c
-        .map((e) => (typeof e === "string" ? '"' + e.trim() + '"' : e))
-        .join(";"),
-    ).join("\r\n");
+        .map((e) => (typeof e === 'string' ? '"' + e.trim() + '"' : e))
+        .join(';'),
+    ).join('\r\n');
   }
 
   toStringEncoded() {
     const rules = [
       {
         from: /(\r\n|\n|\r)/gm,
-        to: " ",
+        to: ' ',
       },
       {
         from: '"',
@@ -42,7 +42,7 @@ export class CSV extends Array<Array<string | number>> {
     return this.map((l) =>
       l
         .map((v) => {
-          if (typeof v === "string") {
+          if (typeof v === 'string') {
             rules.forEach(({ from, to }) => {
               //@ts-expect-error 'v' will always be a string in this case
               v = v.replaceAll(from, to);
@@ -50,10 +50,10 @@ export class CSV extends Array<Array<string | number>> {
           }
           return v;
         })
-        .map((e) => (typeof e === "string" ? '"' + e.trim() + '"' : e)) // Add trailing ""
-        .join(";"),
+        .map((e) => (typeof e === 'string' ? '"' + e.trim() + '"' : e)) // Add trailing ""
+        .join(';'),
     ) // Add CSV separator
-      .join("\r\n"); // Add break line
+      .join('\r\n'); // Add break line
   }
 
   // static readString(csv: string) {
