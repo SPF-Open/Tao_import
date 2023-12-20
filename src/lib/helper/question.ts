@@ -97,7 +97,7 @@ export class Question {
           correct:
             sheet[column.correct + currentRow] &&
             sheet[column.correct + currentRow].h && 
-            (sheet[column.correct + currentRow].h.toLowerCase().trim() === "x"),
+            (sheet[column.correct + currentRow].h.toLowerCase().trim() === 'x'),
         });
       }
       currentRow++;
