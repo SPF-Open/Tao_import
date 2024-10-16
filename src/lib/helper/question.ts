@@ -83,20 +83,31 @@ export class Question {
             ? sheet[column.indicator + currentRow]
             : previousDataInfo.indicator;
 
-        currentQuestion = new QCM({
-          id: sheet[column.title + currentRow],
-          prompt: sheet[column.prompt + currentRow],
-          competency: previousDataInfo.competency,
-          dimension: previousDataInfo.dimension,
-          indicator: previousDataInfo.indicator,
-        });
+
+        try {
+          currentQuestion = new QCM({
+            id: sheet[column.title + currentRow],
+            prompt: sheet[column.prompt + currentRow],
+            competency: previousDataInfo.competency,
+            dimension: previousDataInfo.dimension,
+            indicator: previousDataInfo.indicator,
+          });
+        }
+        catch (e) {
+          console.log(e);
+          console.log(sheet[column.title + currentRow]);
+          console.log(sheet[column.prompt + currentRow]);
+          currentRow = currentRow + 10;
+          continue;
+        }
+
         questions.push(currentQuestion);
       } else {
         currentQuestion.addAlt({
           prompt: sheet[column.prompt + currentRow],
           correct:
             sheet[column.correct + currentRow] &&
-            sheet[column.correct + currentRow].h && 
+            sheet[column.correct + currentRow].h &&
             (sheet[column.correct + currentRow].h.toLowerCase().trim() === 'x'),
         });
       }
@@ -158,18 +169,18 @@ export const langZone = (lang: string) => {
   let zone = '';
   let titlePrefix = '';
   switch (lang) {
-  case 'FR':
-    zone = 'fr-FR';
-    titlePrefix = 'QCM ';
-    break;
-  case 'NL':
-    zone = 'nl-NL';
-    titlePrefix = 'MKV ';
-    break;
-  case 'DE':
-    zone = 'de-DE';
-    titlePrefix = 'Frage ';
-    break;
+    case 'FR':
+      zone = 'fr-FR';
+      titlePrefix = 'QCM ';
+      break;
+    case 'NL':
+      zone = 'nl-NL';
+      titlePrefix = 'MKV ';
+      break;
+    case 'DE':
+      zone = 'de-DE';
+      titlePrefix = 'Frage ';
+      break;
   }
   return { zone, titlePrefix };
 };
