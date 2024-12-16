@@ -6,21 +6,32 @@
     competencyColumn,
     dimensionColumn,
     indicatorColumn,
+    TemplateColumn,
+    followTemplate,
   } from '../helper/store';
 
   import LetterPicker from '../Input/LetterPicker.svelte';
   import OptionnalLetterPicker from '../container/OptionnalLetterPicker.svelte';
+
+  let disable = true;
+
+  followTemplate.subscribe((format) => {
+    disable = format !== TemplateColumn.OTHER;
+    console.log(disable);
+  });
+
+
 </script>
 
 <fieldset class="columnPicker">
   <legend>Column</legend>
   <div class="sub">
     <label for="">Title</label>
-    <LetterPicker bind:value={$titleColumn} />
+    <LetterPicker bind:value={$titleColumn} {disable}/>
     <label for="">Prompt</label>
-    <LetterPicker bind:value={$promptColumn} />
+    <LetterPicker bind:value={$promptColumn} {disable} />
     <label for="">Answer</label>
-    <LetterPicker bind:value={$correctColumn} />
+    <LetterPicker bind:value={$correctColumn} {disable} />
   </div>
   <div class="line"></div>
   <div class="sub">

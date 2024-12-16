@@ -2,7 +2,7 @@
   import Fieldset from '../container/Fieldset.svelte';
 
   interface inputChoice {
-    value?: string;
+    value?: string | boolean | number;
     txt: string;
     id?: string;
     selected?: boolean;
@@ -11,7 +11,7 @@
 
   export let title = '';
   export let inputChoices: inputChoice[] = [];
-  export let choice = '';
+  export let choice: string | boolean | number;
 
   let findSelection = () => {
     if (inputChoices.length < 1) return;

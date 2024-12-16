@@ -1,10 +1,8 @@
 <script lang="ts">
   import Download from './Input/Download.svelte';
   import DropZone from './Input/DropZone.svelte';
-  import LetterPicker from './Input/LetterPicker.svelte';
   import NumberPicker from './Input/NumberPicker.svelte';
   import RadioInput from './Input/RadioInput.svelte';
-  import OptionnalLetterPicker from './container/OptionnalLetterPicker.svelte';
   import {
     currentSheet,
     selectedFormat,
@@ -12,6 +10,8 @@
     workbook,
     langOutput,
     rowOffset,
+    TemplateColumn,
+    followTemplate,
   } from './helper/store';
   import Column from './menu/Column.svelte';
   let sheet: { txt: string; selected: boolean }[];
@@ -37,31 +37,35 @@
       inputChoices={[
         { txt: 'CSV', selected: true },
         { txt: 'PDF' },
-        { txt: 'WORD', disabled: true },
-        { txt: 'PPTX', disabled: true },
-        { txt: 'QTI' },
+        // { txt: 'WORD', disabled: true },
+        // { txt: 'PPTX', disabled: true },
+        // { txt: 'QTI' },
       ]}
       bind:choice={$selectedFormat}
     />
+    <RadioInput
+    title="Answer"
+    inputChoices={[
+      { txt: 'Show', selected:true, value: false },
+      { txt: 'Hide', selected: false, value: true },
+    ]}
+    bind:choice={$hideAnswer}
+  />
     <RadioInput
       title="Langage"
       inputChoices={[{ txt: 'FR' }, { txt: 'NL' }, { txt: 'DE' }]}
       bind:choice={$langOutput}
     />
+
     <RadioInput
-      title="Answer"
-      inputChoices={[
-        { txt: 'Hide', selected: true, value: true },
-        { txt: 'Show', value: false },
-      ]}
-      bind:choice={$hideAnswer}
-    />
-    <RadioInput
-      title="Compare"
-      inputChoices={[
-        { txt: 'OFF', selected: true },
-        { txt: 'ON', disabled: true },
-      ]}
+    title="Template"
+    inputChoices={[
+      { txt: TemplateColumn.FIN, selected: true, value: TemplateColumn.FIN },
+      { txt: TemplateColumn.BOSA, selected: false,value: TemplateColumn.BOSA},
+      { txt: TemplateColumn.OTHER, selected: false,value: TemplateColumn.OTHER},
+    
+    ]}
+      bind:choice={$followTemplate}
     />
     <NumberPicker title="Row offset" bind:value={$rowOffset} />
   </div>
