@@ -12,6 +12,7 @@
     rowOffset,
     TemplateColumn,
     followTemplate,
+    alternative,
   } from './helper/store';
   import Column from './menu/Column.svelte';
   let sheet: { txt: string; selected: boolean }[];
@@ -68,6 +69,7 @@
       bind:choice={$followTemplate}
     />
     <NumberPicker title="Row offset" bind:value={$rowOffset} />
+    <NumberPicker title="Alternative" bind:value={$alternative} />
   </div>
   <Column />
   <div class="bottom">

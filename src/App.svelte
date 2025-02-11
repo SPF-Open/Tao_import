@@ -4,6 +4,7 @@
   import Menu from './lib/Menu.svelte';
   import PreviewTao from './lib/preview/PreviewTAO.svelte';
   import {
+  alternative,
     column_row,
     competencyColumn,
     correctColumn,
@@ -34,7 +35,7 @@
           dimension: get(dimensionColumn),
           indicator: get(indicatorColumn),
         },
-        { offset: get(rowOffset) },
+        { offset: get(rowOffset), alternative: get(alternative) },
       );
     }, 100);
   };

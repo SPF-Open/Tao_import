@@ -29,6 +29,8 @@ export const indicatorColumn = writable(undefined);
 
 // Row
 export const rowOffset = writable(7);
+export const alternative = writable(4);
+
 
 // Detect any change to template change
 followTemplate.subscribe((value) => {
@@ -37,22 +39,25 @@ followTemplate.subscribe((value) => {
     promptColumn.set('F');
     correctColumn.set('G');
     rowOffset.set(7);
+    alternative.set(4);
   } else if (value === TemplateColumn.BOSA) {
     titleColumn.set('F');
     promptColumn.set('H');
     correctColumn.set('I');
     rowOffset.set(16);
+    alternative.set(4);
   }
 });
 
 // Detect any change to column/row event
 export const column_row = derived(
-  [titleColumn, promptColumn, correctColumn, rowOffset],
-  ([$titleColumn, $promptColumn, $correctColumn, $rowOffset]) => [
+  [titleColumn, promptColumn, correctColumn, rowOffset, alternative],
+  ([$titleColumn, $promptColumn, $correctColumn, $rowOffset, $alternative]) => [
     $titleColumn,
     $promptColumn,
     $correctColumn,
     $rowOffset,
+    $alternative
   ],
 );
 

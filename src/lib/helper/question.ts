@@ -56,7 +56,7 @@ export class Question {
       dimension: string;
       indicator: string;
     },
-    row: { offset: number },
+    row: { offset: number; alternative: number, },
   ) {
     let currentRow = row.offset;
     const questions: QCM[] = [];
@@ -69,7 +69,7 @@ export class Question {
     };
 
     while (sheet[column.prompt + currentRow]) {
-      if ((currentRow - row.offset) % 5 == 0 || currentRow == row.offset) {
+      if ((currentRow - row.offset) % (row.alternative + 1) == 0 || currentRow == row.offset) {
         if (column.competency)
           previousDataInfo.competency = sheet[column.competency + currentRow]
             ? sheet[column.competency + currentRow]
@@ -82,7 +82,6 @@ export class Question {
           previousDataInfo.indicator = sheet[column.indicator + currentRow]
             ? sheet[column.indicator + currentRow]
             : previousDataInfo.indicator;
-
 
         try {
           currentQuestion = new QCM({
@@ -97,7 +96,7 @@ export class Question {
           console.log(e);
           console.log(sheet[column.title + currentRow]);
           console.log(sheet[column.prompt + currentRow]);
-          currentRow = currentRow + 10;
+          currentRow = currentRow + row.alternative + 2;
           continue;
         }
 

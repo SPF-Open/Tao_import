@@ -13,10 +13,12 @@ const headerSCV = [
   'choice_2',
   'choice_3',
   'choice_4',
+  'choice_5',
   'choice_1_score',
   'choice_2_score',
   'choice_3_score',
   'choice_4_score',
+  'choice_5_score',
   'correct_answer',
   'metadata_Specdimension',
   'metadata_Speccompetence',
@@ -41,13 +43,23 @@ export const exportToCSV = (questions: QCM[], { lang }: { lang: string }) => {
     csv.addSequentially(0);
     csv.addSequentially(1);
 
+    const offset = 5 - question.answers.length;
+
     question.answers // Map question proposition
       .map((answ) => (answ.prompt.v ? answ.prompt.v : answ.prompt.w))
       .forEach((p) => csv.addSequentially(p));
 
+    for (let i = 0; i < offset; i++) {
+      csv.addSequentially('');
+    }
+
     question.answers // Map question points
       .map((answ) => (answ.correct ? '3' : '-1'))
       .forEach((p) => csv.addSequentially(p));
+
+    for (let i = 0; i < offset; i++) {
+      csv.addSequentially('');
+    }
 
     csv.addSequentially(
       'choice_' + (question.answers.findIndex((q) => q.correct) + 1),
