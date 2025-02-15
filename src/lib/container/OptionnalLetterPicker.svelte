@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { Char } from '@gzlab/uui';
   import { onMount } from 'svelte';
-  import LetterPicker from '../Input/LetterPicker.svelte';
 
-  export let disable = false;
+  export let disabled = false;
   export let value = '';
 
   onMount(() => {
@@ -10,7 +10,7 @@
   });
 
   const onChange = () => {
-    disable = !disable;
+    disabled = !disabled;
     value = '';
   };
 </script>
@@ -18,7 +18,7 @@
 <div>
   <div class="input">
     <input type="checkbox" on:change={() => onChange()} />
-    <LetterPicker bind:value bind:disable />
+    <Char bind:value bind:disabled />
   </div>
 </div>
 

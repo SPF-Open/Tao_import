@@ -1,20 +1,18 @@
 <script lang="ts">
-  import Download from './Input/Download.svelte';
-  import DropZone from './Input/DropZone.svelte';
-  import NumberPicker from './Input/NumberPicker.svelte';
-  import RadioInput from './Input/RadioInput.svelte';
+  import Download from "./Input/Download.svelte";
+  import DropZone from "./Input/DropZone.svelte";
+  import RadioInput from "./Input/RadioInput.svelte";
   import {
     currentSheet,
     selectedFormat,
     hideAnswer,
     workbook,
     langOutput,
-    rowOffset,
     TemplateColumn,
     followTemplate,
-    alternative,
-  } from './helper/store';
-  import Column from './menu/Column.svelte';
+  } from "./helper/store";
+  import Column from "./menu/Column.svelte";
+  import Row from "./menu/Row.svelte";
   let sheet: { txt: string; selected: boolean }[];
 
   workbook.subscribe((workbook) => {
@@ -27,6 +25,7 @@
 </script>
 
 <div class="menu hide-print">
+  <DropZone />
   <div class="choiceSelection">
     <RadioInput
       title="Sheet"
@@ -36,8 +35,8 @@
     <RadioInput
       title="Format"
       inputChoices={[
-        { txt: 'CSV', selected: true },
-        { txt: 'PDF' },
+        { txt: "CSV", selected: true },
+        { txt: "PDF" },
         // { txt: 'WORD', disabled: true },
         // { txt: 'PPTX', disabled: true },
         // { txt: 'QTI' },
@@ -45,50 +44,56 @@
       bind:choice={$selectedFormat}
     />
     <RadioInput
-    title="Answer"
-    inputChoices={[
-      { txt: 'Show', selected:true, value: false },
-      { txt: 'Hide', selected: false, value: true },
-    ]}
-    bind:choice={$hideAnswer}
-  />
+      title="Answer"
+      inputChoices={[
+        { txt: "Show", selected: true, value: false },
+        { txt: "Hide", selected: false, value: true },
+      ]}
+      bind:choice={$hideAnswer}
+    />
     <RadioInput
       title="Langage"
-      inputChoices={[{ txt: 'FR' }, { txt: 'NL' }, { txt: 'DE' }]}
+      inputChoices={[{ txt: "FR" }, { txt: "NL" }, { txt: "DE" }]}
       bind:choice={$langOutput}
     />
 
     <RadioInput
-    title="Template"
-    inputChoices={[
-      { txt: TemplateColumn.FIN, selected: true, value: TemplateColumn.FIN },
-      { txt: TemplateColumn.BOSA, selected: false,value: TemplateColumn.BOSA},
-      { txt: TemplateColumn.OTHER, selected: false,value: TemplateColumn.OTHER},
-    
-    ]}
+      title="Template"
+      inputChoices={[
+        { txt: TemplateColumn.FIN, selected: true, value: TemplateColumn.FIN },
+        {
+          txt: TemplateColumn.BOSA,
+          selected: false,
+          value: TemplateColumn.BOSA,
+        },
+        {
+          txt: TemplateColumn.OTHER,
+          selected: false,
+          value: TemplateColumn.OTHER,
+        },
+      ]}
       bind:choice={$followTemplate}
     />
-    <NumberPicker title="Row offset" bind:value={$rowOffset} />
-    <NumberPicker title="Alternative" bind:value={$alternative} />
+
   </div>
+  <Row />
   <Column />
   <div class="bottom">
     <Download />
-    <DropZone />
   </div>
 </div>
 
 <style>
   .menu {
     z-index: 1;
-    background-color: white;
-    position: fixed;
+    position: sticky;
     border: 2px dotted #00566b;
     padding: 10px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    height: 85vh;
+    min-height: 650px;
+    height: fit-content;
     width: fit-content;
     max-width: 400px;
   }

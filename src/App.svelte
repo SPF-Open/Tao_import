@@ -3,6 +3,7 @@
   import * as XLSX from 'xlsx';
   import Menu from './lib/Menu.svelte';
   import PreviewTao from './lib/preview/PreviewTAO.svelte';
+  import "@gzlab/uui/main.css"
   import {
   alternative,
     column_row,

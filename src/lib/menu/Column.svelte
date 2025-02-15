@@ -8,58 +8,54 @@
     indicatorColumn,
     TemplateColumn,
     followTemplate,
-  } from '../helper/store';
+  } from "../helper/store";
 
-  import LetterPicker from '../Input/LetterPicker.svelte';
-  import OptionnalLetterPicker from '../container/OptionnalLetterPicker.svelte';
+  import OptionnalLetterPicker from "../container/OptionnalLetterPicker.svelte";
+  import { Char } from "@gzlab/uui";
+  import Fieldset from "../container/Fieldset.svelte";
 
-  let disable = true;
+  let disabled = true;
 
   followTemplate.subscribe((format) => {
-    disable = format !== TemplateColumn.OTHER;
-    console.log(disable);
+    disabled = format !== TemplateColumn.OTHER;
+    console.log(disabled);
   });
-
-
 </script>
 
-<fieldset class="columnPicker">
-  <legend>Column</legend>
-  <div class="sub">
-    <label for="">Title</label>
-    <LetterPicker bind:value={$titleColumn} {disable}/>
-    <label for="">Prompt</label>
-    <LetterPicker bind:value={$promptColumn} {disable} />
-    <label for="">Answer</label>
-    <LetterPicker bind:value={$correctColumn} {disable} />
+<Fieldset title="Column">
+  <div class="columnPicker">
+    <div class="sub">
+      <label for="">Title</label>
+      <Char bind:value={$titleColumn} {disabled} />
+      <label for="">Prompt</label>
+      <Char bind:value={$promptColumn} {disabled} />
+      <label for="">Answer</label>
+      <Char bind:value={$correctColumn} {disabled} />
+    </div>
+    <div class="line"></div>
+    <div class="sub">
+      <div>
+        <label for="">Competency</label>
+        <OptionnalLetterPicker bind:value={$competencyColumn} />
+      </div>
+      <div>
+        <label for="">Dimension</label>
+        <OptionnalLetterPicker bind:value={$dimensionColumn} />
+      </div>
+      <div>
+        <label for="">Indicator</label>
+        <OptionnalLetterPicker bind:value={$indicatorColumn} />
+      </div>
+    </div>
   </div>
-  <div class="line"></div>
-  <div class="sub">
-    <div>
-      <label for="">Competency</label>
-      <OptionnalLetterPicker bind:value={$competencyColumn} />
-    </div>
-    <div>
-      <label for="">Dimension</label>
-      <OptionnalLetterPicker bind:value={$dimensionColumn} />
-    </div>
-    <div>
-      <label for="">Indicator</label>
-      <OptionnalLetterPicker bind:value={$indicatorColumn} />
-    </div>
-  </div>
-</fieldset>
+</Fieldset>
 
 <style>
   .columnPicker {
     display: flex;
     flex-wrap: wrap;
-    font-weight: bold;
-    border-radius: 12px;
-    border: 3px solid #00566b;
-    color: #00566b;
-    padding-top: 0;
     justify-content: space-around;
+    flex: 1;
   }
   .columnPicker > div {
     gap: 3px;
@@ -69,13 +65,12 @@
     align-items: center;
   }
   .line {
-    background-color: #00566b;
-    width: 2px;
+    background-color: var(--border-color);
+    width: 3px;
   }
   .columnPicker .sub {
-    display: flex;
     flex-direction: column;
-    width: 33%;
+    flex: 1;
     justify-content: space-evenly;
   }
 </style>

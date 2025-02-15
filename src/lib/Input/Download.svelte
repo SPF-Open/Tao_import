@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { BlobReader, ZipWriter, BlobWriter } from '@zip.js/zip.js';
-  import { exportToCSV, exportToQTI } from '../helper/questions';
+  import { exportToCSV } from "../helper/questions";
   import {
     currentSheet,
     selectedFormat,
@@ -15,9 +14,10 @@
     dimensionColumn,
     indicatorColumn,
     alternative,
-  } from '../helper/store';
-  import { Question } from '../helper/question';
-
+  } from "../helper/store";
+  import { Question } from "../helper/question";
+  import { Button } from "@gzlab/uui";
+  
   let linkFile: HTMLAnchorElement;
 
   const onClick = () => {
@@ -32,67 +32,67 @@
         dimension: $dimensionColumn,
         indicator: $indicatorColumn,
       },
-      { offset: $rowOffset, alternative: $alternative },
+      { offset: $rowOffset, alternative: $alternative }
     );
     switch ($selectedFormat.toLocaleLowerCase()) {
-      case 'csv': {
+      case "csv": {
         const CSVString = exportToCSV(sheet, { lang: $langOutput });
 
-        const blob = new Blob([CSVString], { type: 'text/csv;charset=utf-8,' });
+        const blob = new Blob([CSVString], { type: "text/csv;charset=utf-8," });
         const objUrl = URL.createObjectURL(blob);
 
         linkFile.href = objUrl;
         console.log(fileName);
-        linkFile.download = fileName + ' - ' + $langOutput;
+        linkFile.download = fileName + " - " + $langOutput;
         linkFile.click();
         break;
       }
-      case 'pdf': {
+      case "pdf": {
         window.print();
         break;
       }
-      case 'qti': {
-        const lang = $langOutput;
-        const { manifest, questionsManifest } = exportToQTI(sheet, {
-          lang,
-        });
+      // case 'qti': {
+      //   const lang = $langOutput;
+      //   const { manifest, questionsManifest } = exportToQTI(sheet, {
+      //     lang,
+      //   });
 
-        const manifestBlob = new Blob([manifest.toString()], {
-          type: 'text/xml',
-        });
-        const questionsManifestBlob = questionsManifest.map(
-          (q) => new Blob([q.toString()], { type: 'text/xml' }),
-        );
+      //   const manifestBlob = new Blob([manifest.toString()], {
+      //     type: 'text/xml',
+      //   });
+      //   const questionsManifestBlob = questionsManifest.map(
+      //     (q) => new Blob([q.toString()], { type: 'text/xml' }),
+      //   );
 
-        const ex = async () => {
-          const zipFileStream = new TransformStream();
-          const zipFileBlobPromise = new Response(
-            zipFileStream.readable,
-          ).blob();
+      //   const ex = async () => {
+      //     const zipFileStream = new TransformStream();
+      //     const zipFileBlobPromise = new Response(
+      //       zipFileStream.readable,
+      //     ).blob();
 
-          const zipWriter = new ZipWriter(new BlobWriter('application/zip'));
+      //     const zipWriter = new ZipWriter(new BlobWriter('application/zip'));
 
-          // Create manifest xml file
-          await zipWriter.add('imsmanifest.xml', new BlobReader(manifestBlob));
+      //     // Create manifest xml file
+      //     await zipWriter.add('imsmanifest.xml', new BlobReader(manifestBlob));
 
-          await Promise.all(
-            questionsManifestBlob.map((b, n) =>
-              zipWriter.add(`items/${n}/qti.xml`, new BlobReader(b)),
-            ),
-          );
+      //     await Promise.all(
+      //       questionsManifestBlob.map((b, n) =>
+      //         zipWriter.add(`items/${n}/qti.xml`, new BlobReader(b)),
+      //       ),
+      //     );
 
-          const finalBlob = await zipWriter.close();
+      //     const finalBlob = await zipWriter.close();
 
-          linkFile.setAttribute('href', URL.createObjectURL(finalBlob));
-          linkFile.download = fileName + '.zip';
-          linkFile.click();
-        };
-        ex();
+      //     linkFile.setAttribute('href', URL.createObjectURL(finalBlob));
+      //     linkFile.download = fileName + '.zip';
+      //     linkFile.click();
+      //   };
+      //   ex();
 
-        break;
-      }
+      //   break;
+      // }
       default: {
-        console.log('Not unsuported yet');
+        console.log("Not unsuported yet");
       }
     }
   };
@@ -101,39 +101,25 @@
 <!-- svelte-ignore a11y-missing-attribute -->
 <!-- svelte-ignore a11y-missing-content -->
 <a bind:this={linkFile} download />
-<button on:click|preventDefault={onClick}>
-  <img src="file.svg" alt="FileIcon" />
-  <span> Download Export</span>
-</button>
+<Button type="info" {onClick}>
+  <div class="button">
+    <img src="file.svg" alt="FileIcon" />
+    <span> Download Export</span>
+  </div>
+</Button>
 
 <style>
   a {
     display: none;
   }
-  button {
-    cursor: pointer;
-    background-color: #00566b;
-    border: 3px solid #00566b;
-    border-radius: 12px;
-    margin-left: -1.5px;
-    font-weight: bold;
+  .button {
     display: flex;
-    color: white;
-    transition: 0.3s;
-    align-items: center;
     justify-content: center;
-    gap: 15px;
-    font-size: 16px;
-    padding: 5px 0;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
   }
-  button:hover {
-    background-color: #457e8b;
-  }
-  button:active {
-    transform: scale(0.95);
-    background-color: #00566b;
-  }
-  button img {
+  img {
     height: 30px;
   }
 </style>

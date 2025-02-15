@@ -1,7 +1,7 @@
 {
   "name": "tao_import",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,12 +13,6 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.5.3",
     "@tsconfig/svelte": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
-    "eslint": "^8.54.0",
-    "eslint-plugin-svelte": "^2.35.1",
-    "prettier": "^3.1.0",
-    "prettier-plugin-svelte": "^3.1.2",
     "svelte": "^3.59.2",
     "svelte-atoms": "^0.0.27",
     "svelte-check": "^2.10.3",
@@ -27,8 +21,8 @@
     "vite": "^4.5.0"
   },
   "dependencies": {
+    "@gzlab/uui": "^0.1.1",
     "@zip.js/zip.js": "^2.7.31",
-    "xlsx": "^0.18.5",
-    "xmlbuilder2": "^3.1.1"
+    "xlsx": "^0.18.5"
   }
 }

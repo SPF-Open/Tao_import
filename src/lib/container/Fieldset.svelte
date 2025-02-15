@@ -10,19 +10,15 @@
 <style>
   fieldset {
     position: relative;
-    border: 3px solid #00566b;
+    border: 2px solid var(--border-color);
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
     justify-content: space-around;
     align-items: center;
-    font-weight: bold;
-    color: #00566b;
+    flex-wrap: wrap;
+    gap: 0.3rem;
     border-radius: 12px;
     min-height: 29px;
-  }
-  legend {
-    color: #457e8b;
-    font-size: 13px;
+    font-weight: bold;
+    height: fit-content;
   }
 </style>
