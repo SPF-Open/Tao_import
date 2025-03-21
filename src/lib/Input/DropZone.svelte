@@ -43,6 +43,10 @@
   div {
     border: 2px solid var(--border-color);
     border-radius: 12px;
-    margin-left: -1.5px;
+  }
+
+  div :global(label) {
+    padding: 0 !important;
+    min-height: 100px !important;
   }
 </style>

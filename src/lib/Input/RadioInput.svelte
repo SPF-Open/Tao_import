@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Fieldset from '../container/Fieldset.svelte';
+  import Fieldset from "../container/Fieldset.svelte";
 
   interface inputChoice {
     value?: string | boolean | number;
@@ -9,7 +9,7 @@
     disabled?: boolean;
   }
 
-  export let title = '';
+  export let title = "";
   export let inputChoices: inputChoice[] = [];
   export let choice: string | boolean | number;
 
@@ -30,7 +30,7 @@
 
 <Fieldset {title}>
   {#each inputChoices as { id, txt, value, disabled }}
-    <div class={`radio ${disabled ? 'disabled' : ''}`}>
+    <div class={`radio ${disabled ? "disabled" : ""}`}>
       <input
         type="radio"
         name={id}
@@ -48,6 +48,7 @@
   .radio {
     display: inline-flex;
     align-items: center;
+    user-select: none;
   }
   input {
     margin-top: 0;
@@ -61,15 +62,21 @@
     transition: 0.3s;
   }
   input:checked {
-    border: 6px solid #43cc2d;
+    border: 6px solid var(--primary-color);
   }
+
+  input:focus {
+    outline: none;
+  }
+
   .disabled > * {
     color: #d9d9d9;
     cursor: not-allowed;
   }
   label {
-    font-size: 13px;
+    font-size: var(--font-size-md);
     cursor: pointer;
     padding-left: 4px;
+    margin-top: -2px;
   }
 </style>

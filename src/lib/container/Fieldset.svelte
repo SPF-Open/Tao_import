@@ -12,13 +12,16 @@
     position: relative;
     border: 2px solid var(--border-color);
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.3rem;
     border-radius: 12px;
     min-height: 29px;
-    font-weight: bold;
     height: fit-content;
+  }
+  legend{
+    font-weight: bold;
+    font-size: 0.85rem;
   }
 </style>

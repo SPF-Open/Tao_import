@@ -92,7 +92,7 @@
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    min-height: 650px;
+    min-height: 600px;
     height: fit-content;
     width: fit-content;
     max-width: 400px;

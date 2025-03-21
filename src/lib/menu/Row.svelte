@@ -11,3 +11,9 @@
   <label for="">Alternative</label>
   <Numeric name="Alternative" bind:value={$alternative} />
 </Fieldset>
+
+<style>
+  label {
+    margin-top: -2px;
+  }
+</style>

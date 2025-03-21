@@ -58,7 +58,6 @@
     flex: 1;
   }
   .columnPicker > div {
-    gap: 3px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -66,7 +65,7 @@
   }
   .line {
     background-color: var(--border-color);
-    width: 3px;
+    width: 2px;
   }
   .columnPicker .sub {
     flex-direction: column;
