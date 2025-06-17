@@ -8,9 +8,16 @@
     hideAnswer,
     workbook,
     langOutput,
-    TemplateColumn,
     followTemplate,
+    templateList,
   } from "./helper/store";
+
+  const sheetToIgnore = [
+    "Checklist Questionnaire",
+    "Explications - Toelichting",
+    "Introduction - Introductie",
+  ];
+
   import Column from "./menu/Column.svelte";
   import Row from "./menu/Row.svelte";
   let sheet: { txt: string; selected: boolean }[];
@@ -20,7 +27,9 @@
     sheet = workbook.SheetNames.map((s: string, n: number) => ({
       txt: s,
       selected: n === 0,
-    }));
+    })).filter(
+      (s) => !sheetToIgnore.includes(s.txt)
+    );
   });
 </script>
 
@@ -59,22 +68,9 @@
 
     <RadioInput
       title="Template"
-      inputChoices={[
-        { txt: TemplateColumn.FIN, selected: true, value: TemplateColumn.FIN },
-        {
-          txt: TemplateColumn.BOSA,
-          selected: false,
-          value: TemplateColumn.BOSA,
-        },
-        {
-          txt: TemplateColumn.OTHER,
-          selected: false,
-          value: TemplateColumn.OTHER,
-        },
-      ]}
+      inputChoices={templateList}
       bind:choice={$followTemplate}
     />
-
   </div>
   <Row />
   <Column />

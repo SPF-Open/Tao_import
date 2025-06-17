@@ -16,6 +16,7 @@
     indicatorColumn,
     promptColumn,
     rowOffset,
+    skipRow,
     titleColumn,
   } from './lib/helper/store';
   import { Question } from './lib/helper/question';
@@ -36,7 +37,7 @@
           dimension: get(dimensionColumn),
           indicator: get(indicatorColumn),
         },
-        { offset: get(rowOffset), alternative: get(alternative) },
+        { offset: get(rowOffset), alternative: get(alternative), skipRow: get(skipRow) },
       );
     }, 100);
   };

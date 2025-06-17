@@ -56,7 +56,7 @@ export class Question {
       dimension: string;
       indicator: string;
     },
-    row: { offset: number; alternative: number, },
+    row: { offset: number; alternative: number, skipRow: number }
   ) {
     let currentRow = row.offset;
     const questions: QCM[] = [];
@@ -69,7 +69,7 @@ export class Question {
     };
 
     while (sheet[column.prompt + currentRow]) {
-      if ((currentRow - row.offset) % (row.alternative + 1) == 0 || currentRow == row.offset) {
+      if ((currentRow - row.offset) % (row.alternative + 1 + row.skipRow) == 0 || currentRow == row.offset) {
         if (column.competency)
           previousDataInfo.competency = sheet[column.competency + currentRow]
             ? sheet[column.competency + currentRow]
@@ -83,6 +83,9 @@ export class Question {
             ? sheet[column.indicator + currentRow]
             : previousDataInfo.indicator;
 
+        if (currentQuestion) {
+          currentQuestion.answers[0].correct = true;
+        }
         try {
           currentQuestion = new QCM({
             id: sheet[column.title + currentRow],
@@ -100,14 +103,15 @@ export class Question {
           continue;
         }
 
+        // On new template we have a empty row after the question
+        currentRow += row.skipRow;
+
         questions.push(currentQuestion);
       } else {
         currentQuestion.addAlt({
           prompt: sheet[column.prompt + currentRow],
-          correct:
-            sheet[column.correct + currentRow] &&
-            sheet[column.correct + currentRow].h &&
-            (sheet[column.correct + currentRow].h.toLowerCase().trim() === 'x'),
+          correct: false,
+
         });
       }
       currentRow++;

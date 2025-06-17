@@ -18,7 +18,6 @@
 
   followTemplate.subscribe((format) => {
     disabled = format !== TemplateColumn.OTHER;
-    console.log(disabled);
   });
 </script>
 

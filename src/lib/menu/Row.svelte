@@ -1,15 +1,39 @@
 <script>
   import { Numeric } from "@gzlab/uui";
 
-  import { alternative, rowOffset } from "../helper/store";
+  import {
+    alternative,
+    followTemplate,
+    rowOffset,
+    skipRow,
+    TemplateColumn,
+  } from "../helper/store";
   import Fieldset from "../container/Fieldset.svelte";
+
 </script>
 
 <Fieldset title="Row">
-  <label for="">Row offset</label>
-  <Numeric name="Row offset" bind:value={$rowOffset} />
+  <label for="">Offset</label>
+  <Numeric
+    name="Row offset"
+    bind:value={$rowOffset}
+    size="sm"
+    max={99}
+  />
   <label for="">Alternative</label>
-  <Numeric name="Alternative" bind:value={$alternative} />
+  <Numeric
+    name="Alternative"
+    bind:value={$alternative}
+    size="sm"
+    max={99}
+  />
+  <label for="">Skip</label>
+  <Numeric
+    name="Alternative"
+    bind:value={$skipRow}
+    size="sm"
+    max={99}
+  />
 </Fieldset>
 
 <style>

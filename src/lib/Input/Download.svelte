@@ -14,6 +14,7 @@
     dimensionColumn,
     indicatorColumn,
     alternative,
+    skipRow,
   } from "../helper/store";
   import { Question } from "../helper/question";
   import { Button } from "@gzlab/uui";
@@ -32,7 +33,7 @@
         dimension: $dimensionColumn,
         indicator: $indicatorColumn,
       },
-      { offset: $rowOffset, alternative: $alternative }
+      { offset: $rowOffset, alternative: $alternative, skipRow: $skipRow },
     );
     switch ($selectedFormat.toLocaleLowerCase()) {
       case "csv": {
@@ -42,7 +43,6 @@
         const objUrl = URL.createObjectURL(blob);
 
         linkFile.href = objUrl;
-        console.log(fileName);
         linkFile.download = fileName + " - " + $langOutput;
         linkFile.click();
         break;

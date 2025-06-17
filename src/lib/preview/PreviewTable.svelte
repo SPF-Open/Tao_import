@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { QCM } from './questions';
+    import { QCM } from "../helper/question";
 
   export let QCMs: QCM[] = [];
 </script>
@@ -33,7 +33,5 @@
   .lg-green-bg {
     text-align: left;
     background-color: rgb(135, 228, 135);
-  }
-  td {
   }
 </style>
