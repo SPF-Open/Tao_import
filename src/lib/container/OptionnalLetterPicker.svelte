@@ -17,7 +17,7 @@
 
 <div class="input">
   <input type="checkbox" on:change={() => onChange()} />
-  <Char bind:value bind:disabled />
+  <Char bind:value={value} bind:disabled />
 </div>
 
 <style>

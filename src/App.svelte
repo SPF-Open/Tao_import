@@ -21,8 +21,8 @@
   } from './lib/helper/store';
   import { Question } from './lib/helper/question';
 
-  let questions = [];
-  let workbook;
+  let questions = $state<Question[]>([]);
+  let workbook = $state<XLSX.WorkBook | undefined>(undefined);
 
   const parseAndShow = () => {
     if (!workbook) return;
@@ -42,7 +42,7 @@
     }, 100);
   };
 
-  file.subscribe(async (f) => {
+  file.subscribe(async (f: File) => {
     if (!f) return;
     questions = [];
     workbook = XLSX.read(await f.arrayBuffer());

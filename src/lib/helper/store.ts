@@ -15,9 +15,9 @@ export const templateList = Object.values(TemplateColumn).map((v, i) => ({
 
 export type BindingTemplateDef = {
   column: {
-    title: string,
-    prompt: string,
-    correct?: string,
+    title: string | undefined,
+    prompt: string | undefined,
+    correct?: string | undefined,
   },
   row: {
     offset: number,
@@ -31,7 +31,7 @@ export const bindingTemplate: Record<TemplateColumn, BindingTemplateDef> = {
     column: {
       title: 'E',
       prompt: 'F',
-      correct: undefined,
+      correct: "",
     },
     row: {
       offset: 17,
@@ -79,12 +79,12 @@ export const bindingTemplate: Record<TemplateColumn, BindingTemplateDef> = {
 };
 
 // file input
-export const file = writable(null);
+export const file = writable<File | null>(null);
 export const name = writable('TAO');
-export const workbook = writable(null);
+export const workbook = writable<null | Workbook>(null);
 
 // Menu
-export const currentSheet = writable('');
+export const currentSheet = writable<string | undefined>('');
 export const selectedFormat = writable('');
 export const hideAnswer = writable(false);
 export const langOutput = writable('FR');
@@ -95,9 +95,9 @@ export const titleColumn = writable("");
 export const promptColumn = writable("");
 export const correctColumn = writable("");
 
-export const dimensionColumn = writable(undefined);
-export const competencyColumn = writable(undefined);
-export const indicatorColumn = writable(undefined);
+export const dimensionColumn = writable("");
+export const competencyColumn = writable("");
+export const indicatorColumn = writable("");
 
 // Row
 export const rowOffset = writable(7);
@@ -107,7 +107,7 @@ export const skipRow = writable(0);
 // Detect any change to template change
 followTemplate.subscribe((value) => {
   const v = bindingTemplate[value]
-  if(value === TemplateColumn.OTHER) return;
+  if (value === TemplateColumn.OTHER) return;
   titleColumn.set(v.column.title);
   promptColumn.set(v.column.prompt);
   correctColumn.set(v.column.correct);
