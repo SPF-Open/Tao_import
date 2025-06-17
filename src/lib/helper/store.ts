@@ -84,7 +84,7 @@ export const name = writable('TAO');
 export const workbook = writable<null | Workbook>(null);
 
 // Menu
-export const currentSheet = writable<string | undefined>('');
+export const currentSheet = writable<string>('');
 export const selectedFormat = writable('');
 export const hideAnswer = writable(false);
 export const langOutput = writable('FR');
@@ -129,6 +129,6 @@ export const column_row = derived(
 );
 
 // Pdf
-export const TaoPreviewBind = writable(null);
+export const TaoPreviewBind = writable();
 
 

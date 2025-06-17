@@ -6,7 +6,7 @@
 
   const maxLenghtName = 45;
   let fileName = "";
-  let fileTemp = writable<File[] | null>(null);
+  let fileTemp = writable<File[]>([]);
 
   fileTemp.subscribe(async (f) => {
     if(!f || !f.length) {
@@ -25,7 +25,7 @@
     name.update(() => fileName.split(".").slice(0, -1).join());
 
     // Restore options
-    currentSheet.update(() => undefined);
+    currentSheet.update(() => "");
 
     const data = await e.arrayBuffer();
     /* data is an ArrayBuffer */

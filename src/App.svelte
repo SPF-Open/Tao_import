@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { get } from 'svelte/store';
-  import * as XLSX from 'xlsx';
-  import Menu from './lib/Menu.svelte';
-  import PreviewTao from './lib/preview/PreviewTAO.svelte';
-  import "@gzlab/uui/main.css"
+  import { get } from "svelte/store";
+  import * as XLSX from "xlsx";
+  import Menu from "./lib/Menu.svelte";
+  import PreviewTao from "./lib/preview/PreviewTAO.svelte";
+  import "@gzlab/uui/main.css";
   import {
-  alternative,
+    alternative,
     column_row,
     competencyColumn,
     correctColumn,
@@ -18,31 +18,33 @@
     rowOffset,
     skipRow,
     titleColumn,
-  } from './lib/helper/store';
-  import { Question } from './lib/helper/question';
+  } from "./lib/helper/store";
+  import { QCM, Question } from "./lib/helper/question";
 
-  let questions = $state<Question[]>([]);
+  let questions = $state<QCM[]>([]);
   let workbook = $state<XLSX.WorkBook | undefined>(undefined);
 
   const parseAndShow = () => {
     if (!workbook) return;
-    setTimeout(() => {
-      questions = Question.parseSheet(
-        workbook.Sheets[get(currentSheet)],
-        {
-          title: get(titleColumn),
-          prompt: get(promptColumn),
-          correct: get(correctColumn),
-          competency: get(competencyColumn),
-          dimension: get(dimensionColumn),
-          indicator: get(indicatorColumn),
-        },
-        { offset: get(rowOffset), alternative: get(alternative), skipRow: get(skipRow) },
-      );
-    }, 100);
+    questions = Question.parseSheet(
+      workbook.Sheets[get(currentSheet)],
+      {
+        title: get(titleColumn),
+        prompt: get(promptColumn),
+        correct: get(correctColumn),
+        competency: get(competencyColumn),
+        dimension: get(dimensionColumn),
+        indicator: get(indicatorColumn),
+      },
+      {
+        offset: get(rowOffset),
+        alternative: get(alternative),
+        skipRow: get(skipRow),
+      },
+    );
   };
 
-  file.subscribe(async (f: File) => {
+  file.subscribe(async (f) => {
     if (!f) return;
     questions = [];
     workbook = XLSX.read(await f.arrayBuffer());

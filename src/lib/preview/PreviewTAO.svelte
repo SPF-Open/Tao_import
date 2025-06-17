@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { langOutput, TaoPreviewBind } from '../helper/store';
-  import type { QCM } from '../helper/question';
+  import { langOutput } from "../helper/store";
+  import type { QCM, Question } from "../helper/question";
 
   export let QCMs: QCM[] = [];
   export let hideAnswer: boolean;
 </script>
 
-<div class="questions" bind:this={$TaoPreviewBind}>
+<div class="questions">
   {#each QCMs as QCM, n}
     <div
       class="question"
@@ -14,13 +14,11 @@
     break-inside: avoid-page !important;"
     >
       <div class="title">
-        {QCM.getFakeId($langOutput, n)}
+        {@html QCM.id}
       </div>
       <div class="prompt">
         <br />
-        <!-- eslint-disable svelte/no-at-html-tags -->
         {@html QCM.prompt}
-        <!--eslint-enable-->
         <br />
         <br />
       </div>
@@ -28,13 +26,11 @@
         {#each QCM.answers as answer}
           <li
             class={`answer ${
-              answer.correct && hideAnswer !== true ? 'correct' : ''
+              answer.correct && hideAnswer !== true ? "correct" : ""
             }`}
           >
             <div class="text">
-              <!-- eslint-disable svelte/no-at-html-tags -->
               {@html answer.prompt}
-              <!--eslint-enable-->
             </div>
             {#if hideAnswer !== true}
               <div class="points">{answer.correct ? 3 : -1}</div>
@@ -48,7 +44,7 @@
 
 <style>
   .question {
-    font-family: 'Source Sans Pro';
+    font-family: "Source Sans Pro";
     display: flex;
     flex-direction: column;
     border: 3px solid #007f9f;
