@@ -83,7 +83,7 @@ export class Question {
             ? sheet[column.indicator + currentRow]
             : previousDataInfo.indicator;
 
-        if (currentQuestion) {
+        if (currentQuestion && !column.correct) {
           currentQuestion.answers[0].correct = true;
         }
         try {
@@ -110,8 +110,11 @@ export class Question {
       } else {
         currentQuestion.addAlt({
           prompt: sheet[column.prompt + currentRow],
-          correct: false,
-
+          correct: !column.correct ?
+            false :
+            sheet[column.correct + currentRow] && sheet[column.correct + currentRow].w ?
+              sheet[column.correct + currentRow].w === "x" :
+              false,
         });
       }
       currentRow++;
